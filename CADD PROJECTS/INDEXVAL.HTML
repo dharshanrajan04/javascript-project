@@ -1,0 +1,220 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Contact Form Validation</title>
+
+<style>
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+    font-family:Arial, sans-serif;
+}
+
+body{
+    min-height:100vh;
+    display:flex;
+    justify-content:center;
+    align-items:center;
+    background:#08123a;
+    padding:20px;
+}
+
+.container{
+    width:800px;
+    max-width:100%;
+    background:#fff;
+    padding:40px;
+    border-radius:8px;
+}
+
+.row{
+    display:flex;
+    margin-bottom:25px;
+    align-items:flex-start;
+}
+
+.row label{
+    width:180px;
+    font-size:18px;
+    font-weight:500;
+    color:#222;
+    padding-top:10px;
+}
+
+.input-group{
+    flex:1;
+}
+
+input,
+textarea{
+    width:100%;
+    border:none;
+    border-bottom:1px solid #999;
+    padding:10px 5px;
+    font-size:16px;
+    outline:none;
+}
+
+textarea{
+    resize:none;
+    min-height:100px;
+}
+
+.error{
+    color:#ff6b6b;
+    font-size:14px;
+    display:block;
+    margin-top:5px;
+}
+
+button{
+    display:block;
+    margin:25px auto;
+    background:#08123a;
+    color:#fff;
+    border:none;
+    padding:12px 40px;
+    font-size:18px;
+    border-radius:4px;
+    cursor:pointer;
+}
+
+button:hover{
+    opacity:0.9;
+}
+
+#submitError{
+    text-align:center;
+    font-size:18px;
+    color:red;
+    margin-top:10px;
+}
+
+.success{
+    color:green !important;
+}
+
+@media(max-width:768px){
+    .row{
+        flex-direction:column;
+    }
+
+    .row label{
+        width:100%;
+        margin-bottom:10px;
+    }
+}
+</style>
+</head>
+
+<body>
+
+<div class="container">
+    <form id="contactForm">
+
+        <div class="row">
+            <label>Full Name</label>
+            <div class="input-group">
+                <input type="text" id="name" placeholder="Enter your name">
+                <span class="error" id="nameError"></span>
+            </div>
+        </div>
+
+        <div class="row">
+            <label>Phone No.</label>
+            <div class="input-group">
+                <input type="text" id="phone" placeholder="Enter phone number">
+                <span class="error" id="phoneError"></span>
+            </div>
+        </div>
+
+        <div class="row">
+            <label>Email Id</label>
+            <div class="input-group">
+                <input type="email" id="email" placeholder="Enter email">
+                <span class="error" id="emailError"></span>
+            </div>
+        </div>
+
+        <div class="row">
+            <label>Your Message</label>
+            <div class="input-group">
+                <textarea id="message"></textarea>
+                <span class="error" id="messageError"></span>
+            </div>
+        </div>
+
+        <button type="submit">Submit</button>
+
+        <div id="submitError"></div>
+
+    </form>
+</div>
+
+<script>
+const form = document.getElementById("contactForm");
+
+form.addEventListener("submit", function(e){
+    e.preventDefault();
+
+    let valid = true;
+
+    const name = document.getElementById("name").value.trim();
+    const phone = document.getElementById("phone").value.trim();
+    const email = document.getElementById("email").value.trim();
+    const message = document.getElementById("message").value.trim();
+
+    document.getElementById("nameError").innerHTML = "";
+    document.getElementById("phoneError").innerHTML = "";
+    document.getElementById("emailError").innerHTML = "";
+    document.getElementById("messageError").innerHTML = "";
+    document.getElementById("submitError").innerHTML = "";
+
+    // Name Validation
+    if(name === ""){
+        document.getElementById("nameError").innerHTML =
+        "Name is required";
+        valid = false;
+    }
+
+    // Phone Validation
+    const phonePattern = /^[0-9]{10}$/;
+    if(!phonePattern.test(phone)){
+        document.getElementById("phoneError").innerHTML =
+        "Enter valid phone number";
+        valid = false;
+    }
+
+    // Email Validation
+    const emailPattern = /^[^ ]+@[^ ]+\.[a-z]{2,3}$/;
+    if(!emailPattern.test(email)){
+        document.getElementById("emailError").innerHTML =
+        "Enter valid email";
+        valid = false;
+    }
+
+    // Message Validation
+    if(message.length < 30){
+        document.getElementById("messageError").innerHTML =
+        (30 - message.length) + " MORE CHARACTERS REQUIRED";
+        valid = false;
+    }
+
+    if(!valid){
+        document.getElementById("submitError").innerHTML =
+        "please fix the erroe to submit";
+    }
+    else{
+        document.getElementById("submitError").innerHTML =
+        "FORM SUBMITTED SUCCESSFULLY";
+        document.getElementById("submitError").classList.add("success");
+        form.reset();
+    }
+});
+</script>
+
+</body>
+</html>

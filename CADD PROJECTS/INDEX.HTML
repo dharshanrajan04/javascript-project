@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Weather App</title>
+
+    <link rel="stylesheet" href="style.css" />
+    <link rel="script" href="script.js" />
+</head>
+
+<body>
+
+  <div class="weather-card">
+
+    <div class="search-box">
+      <input type="text" placeholder="Enter city" id="cityInput">
+      <button onclick="checkWeather()">🔍</button>
+    </div>
+
+    <p class="error">City not found</p>
+
+    <img src="https://cdn-icons-png.flaticon.com/512/869/869869.png"
+         class="weather-icon" id="weatherIcon">
+
+    <h1 class="temperature" id="temp">22°C</h1>
+    <h2 class="city" id="city">Bengaluru</h2>
+
+    <div class="details">
+
+      <div class="col">
+        <img src="https://cdn-icons-png.flaticon.com/512/728/728093.png">
+        <div>
+          <p class="humidity" id="humidity">53%</p>
+          <p class="text">Humidity</p>
+        </div>
+      </div>
+
+      <div class="col">
+        <img src="https://cdn-icons-png.flaticon.com/512/553/553416.png">
+        <div>
+          <p class="wind" id="wind">5.66 km/h</p>
+          <p class="text">Wind Speed</p>
+        </div>
+      </div>
+
+    </div>
+
+  </div>
+
+  <script>
+   
+  </script>
+
+</body>
+</html>
